@@ -17,8 +17,17 @@
  * - -1 se o jogo está indefinido.
  */ 
 
-bool verifica_jogo_indefinido(int velha[3][3]) {
-	return false;
+
+bool tem_espaco_vazio(int velha[3][3]) {
+  int index_linha, index_coluna;
+  for (index_linha = 0; index_linha < 3; ++index_linha) {
+    for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
+      if (velha[index_linha][index_coluna] == 0) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 bool vence_diagonal(int num_jogador, int velha[3][3]) {
@@ -70,29 +79,45 @@ bool verifica_vencedor(int num_jogador, int velha[3][3]) {
     vence_diagonal(num_jogador, velha));
 }
 
+bool x_venceu(int velha[3][3]) {
+  return verifica_vencedor(1, velha) == true;
+}
+
+bool o_venceu(int velha[3][3]) {
+  return verifica_vencedor(2, velha) == true;
+}
+
+bool sem_vencedores(int velha[3][3]) {
+  return x_venceu(velha) == false && o_venceu(velha) == false;
+}
+
 bool verifica_empate(int velha[3][3]) {
-  bool x_venceu = verifica_vencedor(1, velha);
-  bool o_venceu = verifica_vencedor(2, velha);
-  if (x_venceu || o_venceu) {
+  if (tem_espaco_vazio(velha)) {
     return false;
   }
-  return true;
+  return sem_vencedores(velha);
+}
+
+bool jogo_indefinido(int velha[3][3]) {
+  if (tem_espaco_vazio(velha) == false) {
+    return false;
+  }
+  return sem_vencedores(velha);
 }
 
 int VerificaVelha(int velha[3][3]) {
-  // Verifica se o jogo está indefinido, caso contrário, busca um empate.
-  // Verifica se ocorreu um empate, caso contrário, procura o vencedor.
   // Verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
+  // Se não houver vencedor, confirma se houve um empate, caso contrário
+  // o jogo é indefinido.
 
-  if (verifica_jogo_indefinido(velha) == true) {
-    return -1;
-  }
-  if (verifica_empate(velha) == true) {
-    return 0;
-  } else if (verifica_vencedor(1, velha) == true) {
+  if (x_venceu(velha)) {
     return 1;
-  } else if (verifica_vencedor(2, velha) == true) {
+  } else if (o_venceu(velha)) {
     return 2;
+  } else if (verifica_empate(velha)) {
+    return 0;
+  } else if (jogo_indefinido(velha)) {
+    return -1;
   }
 
   return -3;
