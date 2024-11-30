@@ -72,9 +72,9 @@ int VerificaVelha(int velha[3][3]) {
   // Verifica linhas, colunas e diagonais.
 
   if (verifica_vencedor(1, velha) == true) {
-	return 1;
+    return 1;
   } else if (verifica_vencedor(2, velha) == true) {
-	return 2;
+    return 2;
   }
 
   return 0;
