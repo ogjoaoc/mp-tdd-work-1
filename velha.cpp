@@ -75,6 +75,13 @@ int VerificaVelha(int velha[3][3]) {
 	return 1;
   }
 
+  // Verificando se o X pode vencer.
+  // Verifica linhas, colunas e diagonais.
+
+  if (verifica_vencedor(3, velha) == true) {
+
+  }
+
   return 0;
 }
 
