@@ -35,12 +35,12 @@ bool vence_diagonal(int num_jogador, int velha[3][3]) {
 }
 
 bool vence_coluna(int num_jogador, int velha[3][3]) {
-  int j;
-  for (j = 0; j < 3; ++j) {
+  int index_coluna;
+  for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
     if (
-      velha[0][j] == num_jogador &&
-      velha[0][j] == velha[1][j] &&
-      velha[1][j] == velha[2][j]) {
+      velha[0][index_coluna] == num_jogador &&
+      velha[0][index_coluna] == velha[1][index_coluna] &&
+      velha[1][index_coluna] == velha[2][index_coluna]) {
       return true;
     }
   }
@@ -48,12 +48,12 @@ bool vence_coluna(int num_jogador, int velha[3][3]) {
 }
 
 bool vence_linha(int num_jogador, int velha[3][3]) {
-  int i;
-  for (i = 0; i < 3; ++i) {
+  int index_linha;
+  for (index_linha = 0; index_linha < 3; ++index_linha) {
     if (
-      velha[i][0] == num_jogador &&
-      velha[i][0] == velha[i][1] &&
-      velha[i][1] == velha[i][2]) {
+      velha[index_linha][0] == num_jogador &&
+      velha[index_linha][0] == velha[index_linha][1] &&
+      velha[index_linha][1] == velha[index_linha][2]) {
       return true;
     }
   }
@@ -70,7 +70,9 @@ bool verifica_vencedor(int num_jogador, int velha[3][3]) {
 bool verifica_empate(int velha[3][3]) {
   bool x_venceu = verifica_vencedor(1, velha);
   bool o_venceu = verifica_vencedor(2, velha);
-  if (x_venceu || o_venceu) return false;
+  if (x_venceu || o_venceu) {
+    return false;
+  }
   return true;
 }
 

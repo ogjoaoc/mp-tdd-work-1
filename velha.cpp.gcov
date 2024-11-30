@@ -1,0 +1,95 @@
+        -:    0:Source:velha.cpp
+        -:    1:/**
+        -:    2: * \file  velha.cpp
+        -:    3: */
+        -:    4:
+        -:    5: 
+        -:    6:#include "velha.hpp"
+        -:    7:
+        -:    8:/** 
+        -:    9: * @brief Verifica situação do jogo da velha.  
+        -:   10: * @author João Carlos.
+        -:   11: * @param  velha Tabuleiro do jogo da velha (matriz 3x3).
+        -:   12: * 
+        -:   13: * Diferentes retornos:
+        -:   14: * - 1 se o X venceu.
+        -:   15: * - 2 se o O venceu.
+        -:   16: * - 0 se o jogo está empatado.
+        -:   17: * - -1 se o jogo está indefinido.
+        -:   18: */ 
+        -:   19:
+        -:   20:
+       14:   21:bool vence_diagonal(int num_jogador, int velha[3][3]) {
+       14:   22:  if (
+       14:   23:    velha[0][0] == num_jogador &&
+       8*:   24:    velha[0][0] == velha[1][1] &&
+    #####:   25:    velha[1][1] == velha[2][2]) {
+    #####:   26:    return true;
+        -:   27:  }
+       14:   28:  if (
+       14:   29:    velha[0][2] == num_jogador &&
+        6:   30:    velha[0][2] == velha[1][1] &&
+        6:   31:    velha[1][1] == velha[2][0]) {
+        4:   32:    return true;
+        -:   33:  }
+       10:   34:  return false;
+        -:   35:}
+        -:   36:
+       18:   37:bool vence_coluna(int num_jogador, int velha[3][3]) {
+        -:   38:  int index_coluna;
+       68:   39:  for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
+       54:   40:    if (
+       54:   41:      velha[0][index_coluna] == num_jogador &&
+       20:   42:      velha[0][index_coluna] == velha[1][index_coluna] &&
+       10:   43:      velha[1][index_coluna] == velha[2][index_coluna]) {
+        4:   44:      return true;
+        -:   45:    }
+        -:   46:  }
+       14:   47:  return false;
+        -:   48:}
+        -:   49:
+       18:   50:bool vence_linha(int num_jogador, int velha[3][3]) {
+        -:   51:  int index_linha;
+       72:   52:  for (index_linha = 0; index_linha < 3; ++index_linha) {
+       54:   53:    if (
+       54:   54:      velha[index_linha][0] == num_jogador &&
+       22:   55:      velha[index_linha][0] == velha[index_linha][1] &&
+        4:   56:      velha[index_linha][1] == velha[index_linha][2]) {
+    #####:   57:      return true;
+        -:   58:    }
+        -:   59:  }
+       18:   60:  return false;
+        -:   61:}
+        -:   62:
+       18:   63:bool verifica_vencedor(int num_jogador, int velha[3][3]) {
+        -:   64:  return (
+       36:   65:    vence_linha(num_jogador, velha) ||
+       36:   66:    vence_coluna(num_jogador, velha) ||
+       32:   67:    vence_diagonal(num_jogador, velha));
+        -:   68:}
+        -:   69:
+        6:   70:bool verifica_empate(int velha[3][3]) {
+        6:   71:  bool x_venceu = verifica_vencedor(1, velha);
+        6:   72:  bool o_venceu = verifica_vencedor(2, velha);
+        6:   73:  if (x_venceu || o_venceu) {
+        4:   74:    return false;
+        -:   75:  }
+        2:   76:  return true;
+        -:   77:}
+        -:   78:
+        6:   79:int VerificaVelha(int velha[3][3]) {
+        -:   80:  // Verifica se ocorreu um empate, caso contrário, procura o vencedor.
+        -:   81:  // Verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
+        -:   82:
+        6:   83:  if (verifica_empate(velha) == true) {
+        2:   84:    return 0;
+        4:   85:  } else if (verifica_vencedor(1, velha) == true) {
+        2:   86:    return 1;
+        2:   87:  } else if (verifica_vencedor(2, velha) == true) {
+        2:   88:    return 2;
+        -:   89:  }
+        -:   90:
+    #####:   91:  return -1;
+        -:   92:}
+        -:   93:
+        -:   94:
