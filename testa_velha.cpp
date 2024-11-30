@@ -19,4 +19,14 @@ TEST_CASE( "Teste 1 : Verifica se o X venceu." ) {
     REQUIRE( VerificaVelha(teste1) == 1 );
 
 } 			
+
+TEST_CASE( "Teste 2 : Verifica se o O venceu." ) {
+	
+	int teste2[3][3]= {   { 1, 0, 2 }, 
+	                      { 1, 2, 1 },
+						  { 2, 0, 0 }
+					  };
+    REQUIRE( VerificaVelha(teste2) == 2 );
+
+} 	
  

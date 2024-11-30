@@ -6,11 +6,11 @@
 #include "velha.hpp"
 
 /** 
- * @brief Verifica situacao do jogo da velha.  
+ * @brief Verifica situação do jogo da velha.  
  * @author João Carlos.
  * @param  velha Tabuleiro do jogo da velha (matriz 3x3).
  * 
- * Diferetes retornos:
+ * Diferentes retornos:
  * - 1 se o X venceu.
  * - 2 se o O venceu.
  * - 0 se o jogo está empatado.
