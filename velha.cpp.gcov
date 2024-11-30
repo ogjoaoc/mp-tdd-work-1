@@ -1,0 +1,151 @@
+        -:    0:Source:velha.cpp
+        -:    1:/**
+        -:    2: * \file  velha.cpp
+        -:    3: */
+        -:    4:
+        -:    5: 
+        -:    6:#include "velha.hpp"
+        -:    7:
+        -:    8:/** 
+        -:    9: * @brief Verifica situação do jogo da velha.  
+        -:   10: * @author João Carlos.
+        -:   11: * @param  velha Tabuleiro do jogo da velha (matriz 3x3).
+        -:   12: * 
+        -:   13: * Diferentes retornos:
+        -:   14: * - 1 se o X venceu.
+        -:   15: * - 2 se o O venceu.
+        -:   16: * - 0 se o jogo está empatado.
+        -:   17: * - -1 se o jogo está indefinido.
+        -:   18: */ 
+        -:   19:
+        -:   20:
+        3:   21:bool tem_espaco_vazio(int velha[3][3]) {
+        -:   22:  int index_linha, index_coluna;
+        6:   23:  for (index_linha = 0; index_linha < 3; ++index_linha) {
+       14:   24:    for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
+       11:   25:      if (velha[index_linha][index_coluna] == 0) {
+        2:   26:        return true;
+        -:   27:      }
+        -:   28:    }
+        -:   29:  }
+        1:   30:  return false;
+        -:   31:}
+        -:   32:
+       14:   33:bool vence_diagonal(int num_jogador, int velha[3][3]) {
+       14:   34:  if (
+       14:   35:    velha[0][0] == num_jogador &&
+       6*:   36:    velha[0][0] == velha[1][1] &&
+    #####:   37:    velha[1][1] == velha[2][2]) {
+    #####:   38:    return true;
+        -:   39:  }
+       14:   40:  if (
+       14:   41:    velha[0][2] == num_jogador &&
+        3:   42:    velha[0][2] == velha[1][1] &&
+        3:   43:    velha[1][1] == velha[2][0]) {
+        1:   44:    return true;
+        -:   45:  }
+       13:   46:  return false;
+        -:   47:}
+        -:   48:
+       16:   49:bool vence_coluna(int num_jogador, int velha[3][3]) {
+        -:   50:  int index_coluna;
+       62:   51:  for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
+       48:   52:    if (
+       48:   53:      velha[0][index_coluna] == num_jogador &&
+       14:   54:      velha[0][index_coluna] == velha[1][index_coluna] &&
+        5:   55:      velha[1][index_coluna] == velha[2][index_coluna]) {
+        2:   56:      return true;
+        -:   57:    }
+        -:   58:  }
+       14:   59:  return false;
+        -:   60:}
+        -:   61:
+       16:   62:bool vence_linha(int num_jogador, int velha[3][3]) {
+        -:   63:  int index_linha;
+       64:   64:  for (index_linha = 0; index_linha < 3; ++index_linha) {
+       48:   65:    if (
+       48:   66:      velha[index_linha][0] == num_jogador &&
+       15:   67:      velha[index_linha][0] == velha[index_linha][1] &&
+        5:   68:      velha[index_linha][1] == velha[index_linha][2]) {
+    #####:   69:      return true;
+        -:   70:    }
+        -:   71:  }
+       16:   72:  return false;
+        -:   73:}
+        -:   74:
+       16:   75:bool verifica_vencedor(int num_jogador, int velha[3][3]) {
+        -:   76:  return (
+       32:   77:    vence_linha(num_jogador, velha) ||
+       32:   78:    vence_coluna(num_jogador, velha) ||
+       30:   79:    vence_diagonal(num_jogador, velha));
+        -:   80:}
+        -:   81:
+       10:   82:bool x_venceu(int velha[3][3]) {
+       10:   83:  return verifica_vencedor(1, velha) == true;
+        -:   84:}
+        -:   85:
+        6:   86:bool o_venceu(int velha[3][3]) {
+        6:   87:  return verifica_vencedor(2, velha) == true;
+        -:   88:}
+        -:   89:
+        2:   90:bool sem_vencedores(int velha[3][3]) {
+       2*:   91:  return x_venceu(velha) == false && o_venceu(velha) == false;
+        -:   92:}
+        -:   93:
+        2:   94:bool verifica_empate(int velha[3][3]) {
+        2:   95:  if (tem_espaco_vazio(velha)) {
+        1:   96:    return false;
+        -:   97:  }
+        1:   98:  return sem_vencedores(velha);
+        -:   99:}
+        -:  100:
+        1:  101:bool jogo_indefinido(int velha[3][3]) {
+        1:  102:  if (tem_espaco_vazio(velha) == false) {
+    #####:  103:    return false;
+        -:  104:  }
+        1:  105:  return sem_vencedores(velha);
+        -:  106:}
+        -:  107:
+        5:  108:bool jogo_impossivel(int velha[3][3]) {
+        5:  109:  int quantidade_x = 0, quantidade_o = 0;
+        -:  110:  int index_linha, index_coluna;
+       20:  111:  for (index_linha = 0; index_linha < 3; ++index_linha) {
+       60:  112:    for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
+       45:  113:      if (velha[index_linha][index_coluna] == 1) {
+       20:  114:        quantidade_x += 1;
+       25:  115:      } else if (velha[index_linha][index_coluna] == 2) {
+       11:  116:        quantidade_o += 1;
+        -:  117:      }
+        -:  118:    }
+        -:  119:  }
+        5:  120:  if (quantidade_o > quantidade_x || (quantidade_x - quantidade_o) > 1) {
+        1:  121:    return true;
+        -:  122:  }
+       4*:  123:  if (x_venceu(velha) && o_venceu(velha)) {
+    #####:  124:    return true;
+        -:  125:  }
+        4:  126:  return false;
+        -:  127:}
+        -:  128:
+        5:  129:int VerificaVelha(int velha[3][3]) {
+        -:  130:  // Verifica se é um tabuleiro de jogo impossível, caso seja possível,
+        -:  131:  // verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
+        -:  132:  // Se não houver vencedor, confirma se houve um empate, caso contrário
+        -:  133:  // o jogo é indefinido.
+        -:  134:
+        5:  135:  if (jogo_impossivel(velha)) {
+        1:  136:    return -2;
+        4:  137:  } else if (x_venceu(velha)) {
+        1:  138:    return 1;
+        3:  139:  } else if (o_venceu(velha)) {
+        1:  140:    return 2;
+        2:  141:  } else if (verifica_empate(velha)) {
+        1:  142:    return 0;
+        1:  143:  } else if (jogo_indefinido(velha)) {
+        1:  144:    return -1;
+        -:  145:  }
+        -:  146:
+    #####:  147:  return -1;
+        -:  148:}
+        -:  149:
+        -:  150:

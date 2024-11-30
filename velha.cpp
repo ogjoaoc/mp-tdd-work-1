@@ -131,9 +131,9 @@ int VerificaVelha(int velha[3][3]) {
   // verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
   // Se não houver vencedor, confirma se houve um empate, caso contrário
   // o jogo é indefinido.
-  
-  if(jogo_impossivel(velha)) {
-	return -2;
+
+  if (jogo_impossivel(velha)) {
+    return -2;
   } else if (x_venceu(velha)) {
     return 1;
   } else if (o_venceu(velha)) {
