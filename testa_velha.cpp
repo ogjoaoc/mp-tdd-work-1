@@ -45,3 +45,12 @@ TEST_CASE("Teste 4 : Verifica jogo indefinido.") {
 					  };
     REQUIRE(VerificaVelha(teste_4) == -1);
 }
+
+TEST_CASE("Teste 5 : Verifica jogo impossível.") {
+
+	int teste_5[3][3] = { { 1, 1, 1 },
+	                      { 1, 1, 1 },
+						  { 1, 1, 2 }
+					  };
+    REQUIRE(VerificaVelha(teste_5) == -2);
+}
