@@ -36,3 +36,12 @@ TEST_CASE("Teste 3 : Verifica se o jogo empatou.") {
 					  };
     REQUIRE(VerificaVelha(teste_3) == 0);
 }
+
+TEST_CASE("Teste 4 : Verifica jogo indefinido.") {
+
+	int teste_4[3][3] = { { 0, 0, 0 },
+	                      { 0, 1, 0 },
+						  { 0, 0, 0 }
+					  };
+    REQUIRE(VerificaVelha(teste_4) == -1);
+}
