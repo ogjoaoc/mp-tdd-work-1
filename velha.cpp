@@ -105,8 +105,13 @@ bool jogo_indefinido(int velha[3][3]) {
   return sem_vencedores(velha);
 }
 
+void jogo_impossivel(int velha[3][3]) {
+
+}
+
 int VerificaVelha(int velha[3][3]) {
-  // Verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
+  // Verifica se é um tabuleiro de jogo impossível, caso seja possível,
+  // verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
   // Se não houver vencedor, confirma se houve um empate, caso contrário
   // o jogo é indefinido.
 
@@ -119,7 +124,7 @@ int VerificaVelha(int velha[3][3]) {
   } else if (jogo_indefinido(velha)) {
     return -1;
   }
-
+  
   return -3;
 }
 
