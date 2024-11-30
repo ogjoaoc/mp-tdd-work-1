@@ -18,6 +18,8 @@
  */ 
 
 
+bool verifica_empate(int velha[3][3]) {}
+
 bool vence_diagonal(int num_jogador, int velha[3][3]) {
   if (
     velha[0][0] == num_jogador &&
