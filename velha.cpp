@@ -18,7 +18,9 @@
  */ 
 
 
-bool verifica_empate(int velha[3][3]) {}
+bool verifica_empate(int velha[3][3]) {
+  return true;
+}
 
 bool vence_diagonal(int num_jogador, int velha[3][3]) {
   if (
@@ -70,16 +72,18 @@ bool verifica_vencedor(int num_jogador, int velha[3][3]) {
 }
 
 int VerificaVelha(int velha[3][3]) {
-  // Verificando o vencedor (X ou O).
-  // Verifica linhas, colunas e diagonais.
+  // Verifica se ocorreu um empate, caso contrário, procura o vencedor.
+  // Verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
 
-  if (verifica_vencedor(1, velha) == true) {
+  if(verifica_empate(velha) == true) {
+
+  } else if (verifica_vencedor(1, velha) == true) {
     return 1;
   } else if (verifica_vencedor(2, velha) == true) {
     return 2;
   }
 
-  return 0;
+  return -1;
 }
 
 
