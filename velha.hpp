@@ -6,4 +6,4 @@ bool verifica_vencedor(int num_jogador, int velha[3][3]);
 bool tem_espaco_vazio(int velha[3][3]);
 bool verifica_empate(int velha[3][3]);
 bool jogo_indefinido(int velha[3][3]);
-void jogo_impossivel(int velha[3][3]);
+bool jogo_impossivel(int velha[3][3]);
