@@ -17,6 +17,9 @@
  * - -1 se o jogo está indefinido.
  */ 
 
+bool verifica_jogo_indefinido(int velha[3][3]) {
+	return false;
+}
 
 bool vence_diagonal(int num_jogador, int velha[3][3]) {
   if (
@@ -77,9 +80,13 @@ bool verifica_empate(int velha[3][3]) {
 }
 
 int VerificaVelha(int velha[3][3]) {
+  // Verifica se o jogo está indefinido, caso contrário, busca um empate.
   // Verifica se ocorreu um empate, caso contrário, procura o vencedor.
   // Verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
 
+  if (verifica_jogo_indefinido(velha) == true) {
+    return -1;
+  }
   if (verifica_empate(velha) == true) {
     return 0;
   } else if (verifica_vencedor(1, velha) == true) {
@@ -88,7 +95,7 @@ int VerificaVelha(int velha[3][3]) {
     return 2;
   }
 
-  return -1;
+  return -3;
 }
 
 
