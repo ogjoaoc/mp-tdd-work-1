@@ -68,18 +68,13 @@ bool verifica_vencedor(int num_jogador, int velha[3][3]) {
 }
 
 int VerificaVelha(int velha[3][3]) {
-  // Verificando se o X pode vencer.
+  // Verificando o vencedor (X ou O).
   // Verifica linhas, colunas e diagonais.
 
   if (verifica_vencedor(1, velha) == true) {
 	return 1;
-  }
-
-  // Verificando se o X pode vencer.
-  // Verifica linhas, colunas e diagonais.
-
-  if (verifica_vencedor(3, velha) == true) {
-
+  } else if (verifica_vencedor(2, velha) == true) {
+	return 2;
   }
 
   return 0;
