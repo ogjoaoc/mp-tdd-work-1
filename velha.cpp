@@ -106,21 +106,24 @@ bool jogo_indefinido(int velha[3][3]) {
 }
 
 bool jogo_impossivel(int velha[3][3]) {
-  int x = 0, o = 0;
-  int i, j;
-  for (i = 0; i < 3; ++i) {
-	 for (j = 0; j < 3; ++j) {
-			x += velha[i][j] == 1;
-			o += velha[i][j] == 2;
-		}
-	}
-	if(o > x || (x - o) > 1) {
-		return true;
-	}
-	if(x_venceu(velha) && o_venceu(velha)) {
-		return true;
-	}
-	return false;
+  int quantidade_x = 0, quantidade_o = 0;
+  int index_linha, index_coluna;
+  for (index_linha = 0; index_linha < 3; ++index_linha) {
+    for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
+      if (velha[index_linha][index_coluna] == 1) {
+        quantidade_x += 1;
+      } else if (velha[index_linha][index_coluna] == 2) {
+        quantidade_o += 1;
+      }
+    }
+  }
+  if (quantidade_o > quantidade_x || (quantidade_x - quantidade_o) > 1) {
+    return true;
+  }
+  if (x_venceu(velha) && o_venceu(velha)) {
+    return true;
+  }
+  return false;
 }
 
 int VerificaVelha(int velha[3][3]) {
@@ -129,7 +132,7 @@ int VerificaVelha(int velha[3][3]) {
   // Se não houver vencedor, confirma se houve um empate, caso contrário
   // o jogo é indefinido.
   
-  if (jogo_impossivel(velha)) {
+  if(jogo_impossivel(velha)) {
 	return -2;
   } else if (x_venceu(velha)) {
     return 1;
@@ -140,7 +143,7 @@ int VerificaVelha(int velha[3][3]) {
   } else if (jogo_indefinido(velha)) {
     return -1;
   }
-  
+
   return -1;
 }
 
