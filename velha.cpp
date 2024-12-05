@@ -2,21 +2,14 @@
  * \file  velha.cpp
  */
 
- 
 #include "velha.hpp"
 
-/** 
- * @brief Verifica situação do jogo da velha.  
- * @author João Carlos.
- * @param  velha Tabuleiro do jogo da velha (matriz 3x3).
- * 
- * Diferentes retornos:
- * - 1 se o X venceu.
- * - 2 se o O venceu.
- * - 0 se o jogo está empatado.
- * - -1 se o jogo está indefinido.
- */ 
-
+/**
+ * @brief Verifica se há espaços vazios no tabuleiro.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se houver espaço vazio, false caso contrário.
+ */
 
 bool tem_espaco_vazio(int velha[3][3]) {
   int index_linha, index_coluna;
@@ -29,6 +22,14 @@ bool tem_espaco_vazio(int velha[3][3]) {
   }
   return false;
 }
+
+/**
+ * @brief Verifica se o jogador venceu em uma das diagonais.
+ * @author João Carlos
+ * @param num_jogador Número identificador do jogador (1 para X, 2 para O).
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogador venceu em uma diagonal, false caso contrário.
+ */
 
 bool vence_diagonal(int num_jogador, int velha[3][3]) {
   if (
@@ -46,6 +47,14 @@ bool vence_diagonal(int num_jogador, int velha[3][3]) {
   return false;
 }
 
+/**
+ * @brief Verifica se o jogador venceu em alguma coluna.
+ * @author João Carlos
+ * @param num_jogador Número identificador do jogador (1 para X, 2 para O).
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogador venceu em uma coluna, false caso contrário.
+ */
+
 bool vence_coluna(int num_jogador, int velha[3][3]) {
   int index_coluna;
   for (index_coluna = 0; index_coluna < 3; ++index_coluna) {
@@ -58,6 +67,14 @@ bool vence_coluna(int num_jogador, int velha[3][3]) {
   }
   return false;
 }
+
+/**
+ * @brief Verifica se o jogador venceu em alguma linha.
+ * @author João Carlos
+ * @param num_jogador Número identificador do jogador (1 para X, 2 para O).
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogador venceu em uma linha, false caso contrário.
+ */
 
 bool vence_linha(int num_jogador, int velha[3][3]) {
   int index_linha;
@@ -72,6 +89,14 @@ bool vence_linha(int num_jogador, int velha[3][3]) {
   return false;
 }
 
+/**
+ * @brief Verifica se o jogador venceu o jogo.
+ * @author João Carlos
+ * @param num_jogador Número identificador do jogador (1 para X, 2 para O).
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogador venceu, false caso contrário.
+ */
+
 bool verifica_vencedor(int num_jogador, int velha[3][3]) {
   return (
     vence_linha(num_jogador, velha) ||
@@ -79,17 +104,45 @@ bool verifica_vencedor(int num_jogador, int velha[3][3]) {
     vence_diagonal(num_jogador, velha));
 }
 
+/**
+ * @brief Verifica se o jogador X venceu.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogador X venceu, false caso contrário.
+ */
+
 bool x_venceu(int velha[3][3]) {
   return verifica_vencedor(1, velha) == true;
 }
+
+/**
+ * @brief Verifica se o jogador O venceu.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogador O venceu, false caso contrário.
+ */
 
 bool o_venceu(int velha[3][3]) {
   return verifica_vencedor(2, velha) == true;
 }
 
+/**
+ * @brief Verifica se não há vencedores.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se não há vencedores, false caso contrário.
+ */
+
 bool sem_vencedores(int velha[3][3]) {
   return x_venceu(velha) == false && o_venceu(velha) == false;
 }
+
+/**
+ * @brief Verifica se o jogo está empatado.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogo está empatado, false caso contrário.
+ */
 
 bool verifica_empate(int velha[3][3]) {
   if (tem_espaco_vazio(velha)) {
@@ -98,12 +151,26 @@ bool verifica_empate(int velha[3][3]) {
   return sem_vencedores(velha);
 }
 
+/**
+ * @brief Verifica se o jogo está indefinido.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogo está indefinido, false caso contrário.
+ */
+
 bool jogo_indefinido(int velha[3][3]) {
   if (tem_espaco_vazio(velha) == false) {
     return false;
   }
   return sem_vencedores(velha);
 }
+
+/**
+ * @brief Verifica se o jogo está em uma situação impossível.
+ * @author João Carlos
+ * @param velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return true se o jogo está em situação impossível, false caso contrário.
+ */
 
 bool jogo_impossivel(int velha[3][3]) {
   int quantidade_x = 0, quantidade_o = 0;
@@ -126,12 +193,19 @@ bool jogo_impossivel(int velha[3][3]) {
   return false;
 }
 
-int VerificaVelha(int velha[3][3]) {
-  // Verifica se é um tabuleiro de jogo impossível, caso seja possível,
-  // verifica o vencedor (X ou O) pelas linhas, colunas e diagonais.
-  // Se não houver vencedor, confirma se houve um empate, caso contrário
-  // o jogo é indefinido.
+/** 
+ * @brief Verifica situação do jogo da velha.  
+ * @author João Carlos
+ * @param  velha Tabuleiro do jogo da velha (matriz 3x3).
+ * @return Inteiro representando o estado do jogo:
+ * - 1 se o X venceu.
+ * - 2 se o O venceu.
+ * - 0 se o jogo está empatado.
+ * - -1 se o jogo está indefinido.
+ * - -2 se o jogo é impossível.
+ */ 
 
+int VerificaVelha(int velha[3][3]) {
   if (jogo_impossivel(velha)) {
     return -2;
   } else if (x_venceu(velha)) {
@@ -143,8 +217,5 @@ int VerificaVelha(int velha[3][3]) {
   } else if (jogo_indefinido(velha)) {
     return -1;
   }
-
   return -1;
 }
-
-

@@ -11,8 +11,7 @@
 
 
 TEST_CASE("Teste 1 : Verifica se o X venceu.") {
-
-    int teste_1[3][3] = { { 2, 0, 1 }, 
+    int teste_1[3][3] = { { 2, 0, 1 },
   	                      { 2, 0, 1 },
 						  { 0, 2, 1 } 
                       };
@@ -20,7 +19,6 @@ TEST_CASE("Teste 1 : Verifica se o X venceu.") {
 } 			
 
 TEST_CASE("Teste 2 : Verifica se o O venceu.") {
-
 	int teste_2[3][3] = { { 1, 0, 2 },
 	                      { 1, 2, 1 },
 						  { 2, 0, 0 }
@@ -29,7 +27,6 @@ TEST_CASE("Teste 2 : Verifica se o O venceu.") {
 }
 
 TEST_CASE("Teste 3 : Verifica se o jogo empatou.") {
-
 	int teste_3[3][3] = { { 1, 1, 2 },
 	                      { 2, 2, 1 },
 						  { 1, 2, 1 }
@@ -38,7 +35,6 @@ TEST_CASE("Teste 3 : Verifica se o jogo empatou.") {
 }
 
 TEST_CASE("Teste 4 : Verifica jogo indefinido.") {
-
 	int teste_4[3][3] = { { 0, 0, 0 },
 	                      { 0, 1, 0 },
 						  { 0, 0, 0 }
@@ -47,7 +43,6 @@ TEST_CASE("Teste 4 : Verifica jogo indefinido.") {
 }
 
 TEST_CASE("Teste 5 : Verifica jogo impossível.") {
-
 	int teste_5[3][3] = { { 1, 1, 1 },
 	                      { 1, 1, 1 },
 						  { 1, 1, 2 }
